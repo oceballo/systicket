@@ -1,0 +1,145 @@
+<?php
+
+namespace OdaliBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * roles
+ *
+ * @ORM\Table(name="roles")
+ * @ORM\Entity(repositoryClass="OdaliBundle\Repository\rolesRepository")
+ */
+class roles
+{
+    /**
+     * @ORM\OneToMany(targetEntity="usuario", mappedBy="roles")
+     */
+    protected $usuario;
+
+    public function __construct()
+    {
+        $this->usuario = new ArrayCollection();
+    }
+
+    /**
+     * @ORM\ManyToOne(targetEntity="departamento_proyecto", inversedBy="roles")
+     * @ORM\JoinColumn(name="departamento_proyecto_id", referencedColumnName="id")
+     */
+    protected $departamento_proyecto;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=255)
+     */
+    private $nombre;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="departamento_proyecto_id", type="integer",unique=true)
+     */
+    private $departamentoProyectoId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="string", length=255)
+     */
+    private $descripcion;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nombre
+     *
+     * @param string $nombre
+     *
+     * @return roles
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return string
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * Set departamentoProyectoId
+     *
+     * @param integer $departamentoProyectoId
+     *
+     * @return roles
+     */
+    public function setDepartamentoProyectoId($departamentoProyectoId)
+    {
+        $this->departamentoProyectoId = $departamentoProyectoId;
+
+        return $this;
+    }
+
+    /**
+     * Get departamentoProyectoId
+     *
+     * @return int
+     */
+    public function getDepartamentoProyectoId()
+    {
+        return $this->departamentoProyectoId;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     *
+     * @return roles
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+}
+

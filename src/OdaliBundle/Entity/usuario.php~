@@ -1,0 +1,317 @@
+<?php
+
+namespace OdaliBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * usuario
+ *
+ * @ORM\Table(name="usuario")
+ * @ORM\Entity(repositoryClass="OdaliBundle\Repository\usuarioRepository")
+ */
+class usuario
+{
+    /**
+     * @ORM\OneToMany(targetEntity="ticket", mappedBy="usuario")
+     */
+    protected $ticket;
+
+    /**
+     * @ORM\OneToMany(targetEntity="notas", mappedBy="usuario")
+     */
+    protected $notas;
+
+    /**
+     * @ORM\OneToMany(targetEntity="historial_ticket", mappedBy="usuario")
+     */
+    protected $historial_ticket;
+
+    /**
+     * @ORM\OneToMany(targetEntity="usuario_categoria", mappedBy="usuario")
+     */
+    protected $usuario_categoria;
+
+    public function __construct()
+    {
+        $this->ticket = new ArrayCollection();
+        $this->notas = new ArrayCollection();
+        $this->historial_ticket = new ArrayCollection();
+        $this->usuario_categoria = new ArrayCollection();
+    }
+
+    /**
+     * @ORM\ManyToOne(targetEntity="roles", inversedBy="usuario")
+     * @ORM\JoinColumn(name="roles_id", referencedColumnName="id")
+     */
+    protected $roles;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombres", type="string", length=255)
+     */
+    private $nombres;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="apellidos", type="string", length=255)
+     */
+    private $apellidos;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="username", type="string", length=255, unique=true)
+     */
+    private $username;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=255)
+     */
+    private $password;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="usuario_categoria_id", type="integer")
+     */
+    private $usuarioCategoriaId;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="roles_id", type="integer")
+     */
+    private $rolesId;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="estado", type="boolean")
+     */
+    private $estado;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_registro", type="datetime")
+     */
+    private $fechaRegistro;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nombres
+     *
+     * @param string $nombres
+     *
+     * @return usuario
+     */
+    public function setNombres($nombres)
+    {
+        $this->nombres = $nombres;
+
+        return $this;
+    }
+
+    /**
+     * Get nombres
+     *
+     * @return string
+     */
+    public function getNombres()
+    {
+        return $this->nombres;
+    }
+
+    /**
+     * Set apellidos
+     *
+     * @param string $apellidos
+     *
+     * @return usuario
+     */
+    public function setApellidos($apellidos)
+    {
+        $this->apellidos = $apellidos;
+
+        return $this;
+    }
+
+    /**
+     * Get apellidos
+     *
+     * @return string
+     */
+    public function getApellidos()
+    {
+        return $this->apellidos;
+    }
+
+    /**
+     * Set username
+     *
+     * @param string $username
+     *
+     * @return usuario
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * Get username
+     *
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     *
+     * @return usuario
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get password
+     *
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * Set usuarioCategoriaId
+     *
+     * @param integer $usuarioCategoriaId
+     *
+     * @return usuario
+     */
+    public function setUsuarioCategoriaId($usuarioCategoriaId)
+    {
+        $this->usuarioCategoriaId = $usuarioCategoriaId;
+
+        return $this;
+    }
+
+    /**
+     * Get usuarioCategoriaId
+     *
+     * @return int
+     */
+    public function getUsuarioCategoriaId()
+    {
+        return $this->usuarioCategoriaId;
+    }
+
+    /**
+     * Set rolesId
+     *
+     * @param integer $rolesId
+     *
+     * @return usuario
+     */
+    public function setRolesId($rolesId)
+    {
+        $this->rolesId = $rolesId;
+
+        return $this;
+    }
+
+    /**
+     * Get rolesId
+     *
+     * @return int
+     */
+    public function getRolesId()
+    {
+        return $this->rolesId;
+    }
+
+    /**
+     * Set estado
+     *
+     * @param boolean $estado
+     *
+     * @return usuario
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return bool
+     */
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+
+    /**
+     * Set fechaRegistro
+     *
+     * @param \DateTime $fechaRegistro
+     *
+     * @return usuario
+     */
+    public function setFechaRegistro($fechaRegistro)
+    {
+        $this->fechaRegistro = $fechaRegistro;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaRegistro
+     *
+     * @return \DateTime
+     */
+    public function getFechaRegistro()
+    {
+        return $this->fechaRegistro;
+    }
+}
+
