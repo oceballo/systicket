@@ -41,14 +41,14 @@ class roles
     /**
      * @var string
      *
-     * @ORM\Column(name="nombre", type="string", length=255)
+     * @ORM\Column(name="nombre", type="string", length=255,unique=true)
      */
     private $nombre;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="departamento_proyecto_id", type="integer",unique=true)
+     * @ORM\Column(name="departamento_proyecto_id", type="integer")
      */
     private $departamentoProyectoId;
 

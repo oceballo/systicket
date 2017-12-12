@@ -11,7 +11,7 @@ class DefaultController extends Controller
     /**
      * @Route("/")
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {   //dump($request);
         //die;
         return $this->render('OdaliBundle:Default:index.html.twig',array('hola'=>"Hola klk"));
