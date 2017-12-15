@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Lista de usuarios</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nombres</th>
+                <th>Username</th>
+                <th>Acciones</th>
+
+            </tr>
+
+
+        </thead>
+        <tbody>
+
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.nombres }} {{ user.apellidos }}</td>
+                    <td>{{ user.username }}</td>
+                    <td><a href="http://systicket/app_dev.php/usuario/{{ user.id }}/edit" class="btn btn-primary">
+                            editar
+                        </a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+{% endblock %}
